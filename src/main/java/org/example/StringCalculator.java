@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,11 +22,18 @@ public class StringCalculator {
             throw new WrongDelimiterException("Two different delimiters in a row are not allowed");
         }
         int sumOfNumbers = 0;
+        ArrayList<Integer> negativeNumbersList = new ArrayList<>();
         text = text.replace("\n",",");
         String[] numbers = text.split(",");
         for(String number:numbers){
             if(!isNumeric(number)) throw new WrongDelimiterException("Wrong delimiter");
+            if(Integer.parseInt(number)<0){
+                negativeNumbersList.add(Integer.parseInt(number));
+            }
             sumOfNumbers += Integer.parseInt(number);
+        }
+        if(!negativeNumbersList.isEmpty()){
+            throw new NegativeNumbersException("Negative numbers are not allowed",negativeNumbersList);
         }
         return sumOfNumbers;
     }

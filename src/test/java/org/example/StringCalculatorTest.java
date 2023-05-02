@@ -125,4 +125,10 @@ class StringCalculatorTest {
         assertEquals(62, StringCalculator.add("//[*][:][?]\n1**1:2::5???53"));
         assertEquals(6, StringCalculator.add("//[*][%]\n1*2%3"));
     }
+    @Test
+    public void shouldReturnSumWithFewMultipliedDelimiters() {
+        assertEquals(10, StringCalculator.add("//[*&^][;:][:%?*]\n1*&^2:%?*:%?*3;:;:;:4"));
+        assertEquals(14, StringCalculator.add("//[**][****]\n5****4**3****2"));
+        assertEquals(28, StringCalculator.add("//[**][&][*][%%][%%%][***]\n1***2%%%3**4%%5*6&7"));
+    }
 }

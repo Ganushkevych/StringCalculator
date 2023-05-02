@@ -120,4 +120,9 @@ class StringCalculatorTest {
         assertEquals(6, StringCalculator.add("//[*]\n1*2**3"));
         assertEquals(6, StringCalculator.add("//[^]\n1^^^2,,3"));
     }
+    @Test
+    public void shouldReturnSumWithFewDelimiters() {
+        assertEquals(62, StringCalculator.add("//[*][:][?]\n1**1:2::5???53"));
+        assertEquals(6, StringCalculator.add("//[*][%]\n1*2%3"));
+    }
 }

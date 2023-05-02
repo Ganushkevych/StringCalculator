@@ -17,7 +17,6 @@ public class StringCalculator {
             text = m.group(2);
             if(text.contains("\n")) throw new WrongDelimiterException("New line delimiter are not allowed with yours delimiter");
             if(YoursDelimiter.contains("][")){
-                System.out.println("hear");
                 YoursDelimiters = YoursDelimiter.split("]\\[");
                 StringBuilder Delimiters = new StringBuilder();
                 Comparator<String> lengthComparator = (s1, s2) -> {

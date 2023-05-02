@@ -17,5 +17,10 @@ class StringCalculatorTest {
     public void shouldReturnSumOfTwoNumbers() {
         assertEquals(3, StringCalculator.add("1,2"));
     }
+    @Test
+    public void shouldReturnSumOfNumbers() {
+        assertEquals(7, StringCalculator.add("1,2,4"));
+        assertEquals(12, StringCalculator.add("1,2,4,5"));
+    }
 
 }

@@ -22,5 +22,37 @@ class StringCalculatorTest {
         assertEquals(7, StringCalculator.add("1,2,4"));
         assertEquals(12, StringCalculator.add("1,2,4,5"));
     }
-
+    @Test
+    public void shouldReturnSumWithNewLineAsDelimiter() {
+        assertEquals(12, StringCalculator.add("1,2\n4,5"));
+        assertEquals(12, StringCalculator.add("1\n2\n4\n5"));
+    }
+    @Test
+    public void shouldThrowExceptionOnTwoDelimitersInARow() {
+        try{
+            StringCalculator.add("1,\n2,3");
+            fail("Should be WrongDelimiterException");
+        }catch (WrongDelimiterException ignored){}
+    }
+    @Test
+    public void shouldThrowExceptionOnUnknownDelimiter() {
+        try{
+            StringCalculator.add("1,2$3");
+            fail("Should be WrongDelimiterException");
+        }catch (WrongDelimiterException ignored){}
+    }
+    @Test
+    public void shouldThrowExceptionOnDelimiterAtTheEnd() {
+        try{
+            StringCalculator.add("\n1,2,3");
+            fail("Should be WrongDelimiterException");
+        }catch (WrongDelimiterException ignored){}
+    }
+    @Test
+    public void shouldThrowExceptionOnDelimiterAtTheBegin() {
+        try{
+            StringCalculator.add("1,2,3,");
+            fail("Should be WrongDelimiterException");
+        }catch (WrongDelimiterException ignored){}
+    }
 }

@@ -115,4 +115,9 @@ class StringCalculatorTest {
     public void shouldReturnSumAvoidingNumberThatMoreThanThousand2() {
         assertEquals(1999, StringCalculator.add("//*\n1000*999,1001"));
     }
+    @Test
+    public void shouldReturnSumWithMultipliedDelimiter() {
+        assertEquals(6, StringCalculator.add("//[*]\n1*2**3"));
+        assertEquals(6, StringCalculator.add("//[^]\n1^^^2,,3"));
+    }
 }

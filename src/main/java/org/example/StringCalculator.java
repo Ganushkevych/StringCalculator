@@ -7,6 +7,15 @@ import java.util.regex.Pattern;
 public class StringCalculator {
     public static int add(String text){
         if(text.isEmpty()) return 0;
+        else if(Pattern.compile("//\\[(.*)]\n(.*)").matcher(text).matches()){
+            Matcher m = Pattern.compile("//\\[(.*)]\n(.*)").matcher(text);
+            m.matches();
+            String YoursDelimiter = m.group(1);
+            text = m.group(2);
+            System.out.println(YoursDelimiter);
+            if(text.contains("\n")) throw new WrongDelimiterException("New line delimiter are not allowed with yours delimiter");
+            text = text.replace(YoursDelimiter, "\n");
+        }
         else if(Pattern.compile("//(.*)\n(.*)").matcher(text).matches()){
             Matcher m = Pattern.compile("//(.*)\n(.*)").matcher(text);
             m.matches();
@@ -26,11 +35,13 @@ public class StringCalculator {
         text = text.replace("\n",",");
         String[] numbers = text.split(",");
         for(String number:numbers){
-            if(!isNumeric(number)) throw new WrongDelimiterException("Wrong delimiter");
-            if(Integer.parseInt(number)<0){
-                negativeNumbersList.add(Integer.parseInt(number));
+            if(!number.isEmpty()){
+                if(!isNumeric(number)) throw new WrongDelimiterException("Wrong delimiter");
+                if(Integer.parseInt(number)<0){
+                    negativeNumbersList.add(Integer.parseInt(number));
+                }
+                else if(Integer.parseInt(number)<=1000) sumOfNumbers += Integer.parseInt(number);
             }
-            else if(Integer.parseInt(number)<=1000) sumOfNumbers += Integer.parseInt(number);
         }
         if(!negativeNumbersList.isEmpty()){
             throw new NegativeNumbersException("Negative numbers are not allowed",negativeNumbersList);
